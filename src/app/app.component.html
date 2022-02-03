@@ -1,0 +1,32 @@
+<div class="container">
+	<h3 class="mt-4">Basic</h3>
+	<monthpicker (change)="onChange($event)"></monthpicker>
+
+	<h3 class="mt-4">Enabled Months</h3>
+	<monthpicker (change)="onChange($event)" [enabledMonths]="[9,10,11]"></monthpicker>
+
+	<h3 class="mt-4">Disabled Months</h3>
+	<monthpicker (change)="onChange($event)" [disabledMonths]="[2,5,8, 11]"></monthpicker>
+
+	<h3 class="mt-4">Preselected Year - 2010 and month - Mai</h3>
+	<monthpicker (change)="onChange($event)" [year]="2010" [month]="4"></monthpicker>
+
+	<h3 class="mt-4">Locale - english</h3>
+	<monthpicker (change)="onChange($event)" [locale]="'en'"></monthpicker>
+
+	<h3 class="mt-4">Enabled Years</h3>
+	<monthpicker (change)="onChange($event)" [enabledYears]="[2016, 2017,2018, 2019]"></monthpicker>
+
+	<h3 class="mt-4">Disabled Years</h3>
+	<monthpicker (change)="onChange($event)" [disabledYears]="[2014, 2015, 2016, 2017]"></monthpicker>
+
+	<!-- <h2>Info</h2> 
+	<dl class="row">
+		<dt class="col col-6">selected year</dt>
+		<dd class="col col-6">{{selectedYearAsText}}</dd>
+
+		<dt class="col col-6">selected month</dt>
+		<dd class="col col-6">{{selectedMonthAsText}} (index: {{selectedMonthIndex}})</dd>
+	</dl> -->
+
+</div>
