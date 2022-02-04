@@ -30,10 +30,25 @@ export class MonthpickerComponent implements OnInit {
   currentYear: number;
   yearStartIndex: number;
   yearEndIndex: number;
+  inputText = "01/2021"
+  validFormat: boolean;
+  yearInRange: boolean;
+
+  onTextChange(){
+    if(this.renderOption === 'input' && this.inputText){
+      this.matchesMonthAndYear(this.inputText);
+      if(this.validFormat && this.yearInRange){
+        let monthIndex = (+this.inputText.split('/')[0])-1;
+        let year = +this.inputText.split('/')[1];
+        this.model.selectedYearMoment = moment().month(monthIndex).year(year);
+        [monthIndex, year] = this.model.updateMonthYearChanges();
+        this.showMonthYear(monthIndex, year);
+      }
+    }
+  }
 
   ngOnInit() {
     moment.locale('en');
-    //MM/YYYY regex ^((0[1-9])|(1[0-2]))\/((2009)|(20[1-2][0-9]))$
     this.model = new MonthPickerModel();
     this.yearRanges = this.model.generateYearsBetween(
       this.startYear,
@@ -45,9 +60,10 @@ export class MonthpickerComponent implements OnInit {
       this.model.updateYearText();
     }
 
-    if (this.month) {
+    if (typeof this.month === 'number') {
       this.model.selectedMonthIndex = this.month;
       this.model.selectedMonthMoment = moment().month(this.month);
+
       if (this.year) {
         this.model.selectedMonthYear = this.year;
       }
@@ -160,7 +176,11 @@ export class MonthpickerComponent implements OnInit {
   }
 
   private matchesMonthAndYear(input: string) {
-    return /((0[1-9]|1[0-2])\/[12]\d{3})/.test(input);
+    this.validFormat = /((0[1-9]|1[0-2])\/[12]\d{3})/.test(input);
+    if(this.validFormat){
+      const year = +input.split('/')[1];
+      this.yearInRange = year >= this.yearRanges[0] && year <= this.yearRanges[this.yearRanges.length - 1];
+    }
   }
 }
 

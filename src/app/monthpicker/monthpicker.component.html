@@ -2,25 +2,29 @@
 <div class="card">
    <div class="card-header">
       <div class="d-flex align-items-center">
-         <button class="btn mr-auto" (click)="decrementMonth()">
+         <button class="btn mr-auto" style="background-color:red"  
+				 (click)="decrementMonth()">
          <i class="fa fa-chevron-left"></i>
          </button>
+				 <button class="btn mr-auto" style="background-color:orange" 
+				 (click)="onTextChange()">Input</button>
          <button class="btn" (click)="toggleShowYears()">
          {{selectedMonthAsText}} {{selectedYearAsText}}
          </button>
-         <button class="btn ml-auto" (click)="incrementMonth()">
+         <button class="btn ml-auto" style="background-color:red"
+				 (click)="incrementMonth()">
          <i class="fa fa-chevron-right"></i>
          </button>
       </div>
       <div class="card-header" *ngIf="!isShowYears">
          <div class="d-flex align-items-center">
-            <button class="btn mr-auto" (click)="model.decrementYear()">
+            <button class="btn mr-auto" style="background-color:black" (click)="model.decrementYear()">
             <i class="fa fa-chevron-left"></i>
             </button>
             <button class="btn" (click)="toggleShowYears()">
             {{model.selectedYearText}}
             </button>
-            <button class="btn ml-auto" (click)="model.incrementYear()">
+            <button class="btn ml-auto" style="background-color:black" (click)="model.incrementYear()">
             <i class="fa fa-chevron-right"></i>
             </button>
          </div>
