@@ -60,13 +60,10 @@ export class MonthpickerComponent implements OnInit {
       this.model.updateYearText();
     }
 
-    if (typeof this.month === 'number') {
-      this.model.selectedMonthIndex = this.month;
-      this.model.selectedMonthMoment = moment().month(this.month);
-
-      if (this.year) {
-        this.model.selectedMonthYear = this.year;
-      }
+    if (this.month >= 1 && this.month < 13 ) {
+      this.model.selectedMonthIndex = this.month - 1;
+      this.model.selectedMonthMoment = moment().month(this.month - 1);
+      if (this.year) { this.model.selectedMonthYear = this.year };
     }
 
     this.onChange(this.model.selectedMonthIndex, this.model.selectedMonthYear);
