@@ -33,7 +33,7 @@ export class MonthpickerComponent implements OnInit {
 
   ngOnInit() {
     moment.locale('en');
-
+    //MM/YYYY regex ^((0[1-9])|(1[0-2]))\/((2009)|(20[1-2][0-9]))$
     this.model = new MonthPickerModel();
     this.yearRanges = this.model.generateYearsBetween(
       this.startYear,
@@ -157,6 +157,10 @@ export class MonthpickerComponent implements OnInit {
   private renderYears() {
     this.years = [];
     this.years = this.yearRanges.slice(this.yearStartIndex, this.yearEndIndex);
+  }
+
+  private matchesMonthAndYear(input: string) {
+    return /((0[1-9]|1[0-2])\/[12]\d{3})/.test(input);
   }
 }
 
