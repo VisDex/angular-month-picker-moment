@@ -1,95 +1,76 @@
 <div class="month-picker">
-	<div class="card">
-	<div class="card-header">
-		<div class="d-flex align-items-center">
-			
-			<button class="btn mr-auto" style="background-color:red" (click)="decrementMonth()">
-				<i class="fa fa-chevron-left"></i>
-				</button>
-			
-			<button class="btn" (click)="toggleShowYears()">
-				{{selectedMonthAsText}} {{selectedYearAsText}}
-			</button>
-
-			<button class="btn ml-auto" style="background-color:red" (click)="incrementMonth()">
-				<i class="fa fa-chevron-right"></i>
-			</button>
-
-		</div> 
-		<div class="card-header" *ngIf="!isShowYears">
-			<div class="d-flex align-items-center">
-				
-        <button class="btn mr-auto" style="background-color:black" (click)="model.decrementYear()">
-          <i class="fa fa-chevron-left"></i>
-          </button>
-				
-        <button class="btn" (click)="toggleShowYears()">
-          {{model.selectedYearText}}
-        </button>
-
-				<button class="btn ml-auto" style="background-color:black" (click)="model.incrementYear()">
-          <i class="fa fa-chevron-right"></i>
-        </button>
-
-			</div> 
-		</div>
-
-
-		<div class="card-header" *ngIf="isShowYears">
-			<div class="d-flex align-items-center">
-				
-				<button class="btn mr-auto" style="background-color:blue" 
-				[disabled]="yearStartIndex === 0"
-				(click)="decrementYearRanges()">
-					<i class="fa fa-chevron-left"></i>
-					</button>
-				
-					<button class="btn" (click)="toggleShowYears()">
-					{{years[0]}}-{{years[years.length-1]}}
-				</button>
-
-				<button class="btn ml-auto" style="background-color:blue" 
-				[disabled]="yearEndIndex === yearRanges.length"
-				(click)="incrementYearRanges()">
-					<i class="fa fa-chevron-right"></i>
-				</button>
-
-			</div> 
-		</div>
-
-		<div class="card-body">
-			<div class="month-picker-body">
-
-				<div class="row" *ngIf="!isShowYears">
-					<div class="col col-4" *ngFor="let month of model.months; let i = index">
-						<div class="month-picker-cell">
-							<button class="btn btn-block" 
-              [ngClass]="{'btn-primary': isSelectedMonth(i)}"
-              [disabled]="isDisabled(i)"
-							 (click)="selectMonth(i)">
-                <small>{{month}}</small>
-              </button>
-						</div>
-					</div>
-				</div>
-
-
-        <div class="row" *ngIf="isShowYears">
-					<div class="col col-4" *ngFor="let year of years; let i = index">
-						<div class="month-picker-cell">
-							<button class="btn btn-block" 
-              [ngClass]="{'btn-primary': isSelectedYear(year)}"
-              [disabled]="isDisabledYear(year)"
-              (click)="selectYear(year)"
-              >
-                <small>{{year}}</small>
-              </button>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-	</div>
+<div class="card">
+   <div class="card-header">
+      <div class="d-flex align-items-center">
+         <button class="btn mr-auto" (click)="decrementMonth()">
+         <i class="fa fa-chevron-left"></i>
+         </button>
+         <button class="btn" (click)="toggleShowYears()">
+         {{selectedMonthAsText}} {{selectedYearAsText}}
+         </button>
+         <button class="btn ml-auto" (click)="incrementMonth()">
+         <i class="fa fa-chevron-right"></i>
+         </button>
+      </div>
+      <div class="card-header" *ngIf="!isShowYears">
+         <div class="d-flex align-items-center">
+            <button class="btn mr-auto" (click)="model.decrementYear()">
+            <i class="fa fa-chevron-left"></i>
+            </button>
+            <button class="btn" (click)="toggleShowYears()">
+            {{model.selectedYearText}}
+            </button>
+            <button class="btn ml-auto" (click)="model.incrementYear()">
+            <i class="fa fa-chevron-right"></i>
+            </button>
+         </div>
+      </div>
+      <div class="card-header" *ngIf="isShowYears">
+         <div class="d-flex align-items-center">
+            <button class="btn mr-auto" style="background-color:blue" 
+            [disabled]="yearStartIndex === 0"
+            (click)="decrementYearRanges()">
+            <i class="fa fa-chevron-left"></i>
+            </button>
+            <button class="btn" (click)="toggleShowYears()">
+            <span *ngIf="years[0] === years[years.length-1]">{{years[0]}}</span>
+            <span *ngIf="years[0] !== years[years.length-1]">{{years[0]}}-{{years[years.length-1]}}</span>
+            </button>
+            <button class="btn ml-auto" style="background-color:blue" 
+            [disabled]="yearEndIndex === yearRanges.length"
+            (click)="incrementYearRanges()">
+            <i class="fa fa-chevron-right"></i>
+            </button>
+         </div>
+      </div>
+      <div class="card-body">
+         <div class="month-picker-body">
+            <div class="row" *ngIf="!isShowYears">
+               <div class="col col-4" *ngFor="let month of model.months; let i = index">
+                  <div class="month-picker-cell">
+                     <button class="btn btn-block" 
+                     [ngClass]="{'btn-primary': isSelectedMonth(i)}"
+                     [disabled]="isDisabled(i)"
+                     (click)="selectMonth(i)">
+                     <small>{{month}}</small>
+                     </button>
+                  </div>
+               </div>
+            </div>
+            <div class="row" *ngIf="isShowYears">
+               <div class="col col-4" *ngFor="let year of years; let i = index">
+                  <div class="month-picker-cell">
+                     <button class="btn btn-block" 
+                     [ngClass]="{'btn-primary': isSelectedYear(year)}"
+                     [disabled]="isDisabledYear(year)"
+                     (click)="selectYear(year)"
+                     >
+                     <small>{{year}}</small>
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>

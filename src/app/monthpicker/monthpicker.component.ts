@@ -103,12 +103,12 @@ export class MonthpickerComponent implements OnInit {
   toggleShowYears() {
     this.isShowYears = !this.isShowYears;
     if (this.isShowYears) {
-      const currentYear = moment().year();
-      const currentYearIndex = this.yearRanges.findIndex(
-        (x) => x === currentYear
+      const selectedYearIndex = this.yearRanges.findIndex(
+        (x) => x === this.model.selectedMonthYear
       );
-      this.yearStartIndex = currentYearIndex - 12;
-      this.yearEndIndex = currentYearIndex + 13;
+      this.yearStartIndex = selectedYearIndex - 12 < 0 ? 0: selectedYearIndex - 12;
+      this.yearEndIndex = selectedYearIndex + 13 > this.yearRanges.length
+      ? this.yearRanges.length: selectedYearIndex + 13 ;
       this.renderYears();
     }
   }

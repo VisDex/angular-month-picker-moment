@@ -1,6 +1,9 @@
 <div class="container">
 	<h3 class="mt-4">Basic</h3>
-	<monthpicker (change)="onChange($event)"></monthpicker>
+	<monthpicker (change)="onChange($event)"
+	[startYear]="2020"
+	[endYear]="2060"
+	></monthpicker>
 
 	<h3 class="mt-4">Enabled Months</h3>
 	<monthpicker (change)="onChange($event)" [enabledMonths]="[9,10,11]"></monthpicker>
