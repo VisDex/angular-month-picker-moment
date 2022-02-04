@@ -20,7 +20,7 @@ export class MonthpickerComponent implements OnInit {
   @Input() endYear: number;
   @Input() locale: string;
   @Output() change = new EventEmitter<{ monthIndex: number; year: number }>();
-  
+
   model: MonthPickerModel;
   isShowYears: boolean;
   years: Array<number> = [];
@@ -35,7 +35,10 @@ export class MonthpickerComponent implements OnInit {
     moment.locale('en');
 
     this.model = new MonthPickerModel();
-    this.yearRanges = this.model.generateYearsBetween(this.startYear, this.endYear);
+    this.yearRanges = this.model.generateYearsBetween(
+      this.startYear,
+      this.endYear
+    );
 
     if (this.year) {
       this.model.selectedYearMoment = moment().year(this.year);
@@ -45,19 +48,27 @@ export class MonthpickerComponent implements OnInit {
     if (this.month) {
       this.model.selectedMonthIndex = this.month;
       this.model.selectedMonthMoment = moment().month(this.month);
-      if (this.year) { this.model.selectedMonthYear = this.year };
+      if (this.year) {
+        this.model.selectedMonthYear = this.year;
+      }
     }
 
     this.onChange(this.model.selectedMonthIndex, this.model.selectedMonthYear);
   }
 
   decrementMonth() {
-    const [monthIndex, year] = this.model.decrementMonth(this.model.selectedMonthIndex, this.model.selectedMonthYear);
+    const [monthIndex, year] = this.model.decrementMonth(
+      this.model.selectedMonthIndex,
+      this.model.selectedMonthYear
+    );
     this.showMonthYear(monthIndex, year);
   }
 
   incrementMonth() {
-    const [monthIndex, year] = this.model.incrementMonth(this.model.selectedMonthIndex, this.model.selectedMonthYear);
+    const [monthIndex, year] = this.model.incrementMonth(
+      this.model.selectedMonthIndex,
+      this.model.selectedMonthYear
+    );
     this.showMonthYear(monthIndex, year);
   }
 
@@ -67,7 +78,10 @@ export class MonthpickerComponent implements OnInit {
   }
 
   isSelectedMonth(monthIndex: number): boolean {
-    return this.model.selectedMonthIndex === monthIndex && this.model.selectedMonthYear === this.model.selectedYearMoment.year();
+    return (
+      this.model.selectedMonthIndex === monthIndex &&
+      this.model.selectedMonthYear === this.model.selectedYearMoment.year()
+    );
   }
 
   onChange(monthIndex: number, year: number) {
@@ -90,7 +104,9 @@ export class MonthpickerComponent implements OnInit {
     this.isShowYears = !this.isShowYears;
     if (this.isShowYears) {
       const currentYear = moment().year();
-      const currentYearIndex = this.yearRanges.findIndex(x => x === currentYear);
+      const currentYearIndex = this.yearRanges.findIndex(
+        (x) => x === currentYear
+      );
       this.yearStartIndex = currentYearIndex - 12;
       this.yearEndIndex = currentYearIndex + 13;
       this.renderYears();
@@ -98,14 +114,17 @@ export class MonthpickerComponent implements OnInit {
   }
   decrementYearRanges() {
     this.yearEndIndex = this.yearStartIndex;
-    this.yearStartIndex = this.yearStartIndex - 25 < 0 ? 0 : this.yearStartIndex - 25;
+    this.yearStartIndex =
+      this.yearStartIndex - 25 < 0 ? 0 : this.yearStartIndex - 25;
     this.renderYears();
   }
 
   incrementYearRanges() {
     this.yearStartIndex = this.yearEndIndex;
-    this.yearEndIndex = this.yearStartIndex + 25 > this.yearRanges.length - 1
-      ? this.yearRanges.length - 1 : this.yearStartIndex + 25;
+    this.yearEndIndex =
+      this.yearStartIndex + 25 > this.yearRanges.length
+        ? this.yearRanges.length
+        : this.yearStartIndex + 25;
     this.renderYears();
   }
 
@@ -122,10 +141,10 @@ export class MonthpickerComponent implements OnInit {
   isDisabledYear(year: number): boolean {
     let disabled = false;
     if (this.enabledYears && this.enabledYears.length > 0) {
-      disabled = this.enabledYears.findIndex(y => y === year) < 0;
+      disabled = this.enabledYears.findIndex((y) => y === year) < 0;
     }
     if (this.disabledYears && this.disabledYears.length > 0) {
-      disabled = this.disabledYears.findIndex(y => y === year) >= 0;
+      disabled = this.disabledYears.findIndex((y) => y === year) >= 0;
     }
     return disabled;
   }
@@ -134,13 +153,12 @@ export class MonthpickerComponent implements OnInit {
     this.selectedYearAsText = year.toString();
     this.selectedMonthAsText = moment().month(monthIndex).format('MMMM');
   }
-  
+
   private renderYears() {
     this.years = [];
     this.years = this.yearRanges.slice(this.yearStartIndex, this.yearEndIndex);
   }
 }
-
 
 export class MonthPickerModel {
   constructor() {
@@ -164,7 +182,6 @@ export class MonthPickerModel {
 
   months: Array<string> = [];
 
- 
   updateYearText() {
     this.selectedYearText = moment(this.selectedYearMoment).format('YYYY');
   }
@@ -176,24 +193,24 @@ export class MonthPickerModel {
   }
 
   incrementYear() {
-    this.selectedYearMoment = this.selectedYearMoment.add(1, "year")
+    this.selectedYearMoment = this.selectedYearMoment.add(1, 'year');
     this.updateYearText();
   }
 
   decrementYear() {
-    this.selectedYearMoment = this.selectedYearMoment.subtract(1, "year")
+    this.selectedYearMoment = this.selectedYearMoment.subtract(1, 'year');
     this.updateYearText();
   }
 
   incrementMonth(monthIndex, year): Array<number> {
     const currentMonthMoment = moment().month(monthIndex).year(year);
-    this.selectedYearMoment = currentMonthMoment.add(1, "month");
+    this.selectedYearMoment = currentMonthMoment.add(1, 'month');
     return this.updateMonthYearChanges();
   }
 
   decrementMonth(monthIndex, year): Array<number> {
     const currentMonthMoment = moment().month(monthIndex).year(year);
-    this.selectedYearMoment = currentMonthMoment.subtract(1, "month");
+    this.selectedYearMoment = currentMonthMoment.subtract(1, 'month');
     return this.updateMonthYearChanges();
   }
 
@@ -216,5 +233,4 @@ export class MonthPickerModel {
     }
     return years;
   }
-
 }

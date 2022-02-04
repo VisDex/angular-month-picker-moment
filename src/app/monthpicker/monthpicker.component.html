@@ -38,7 +38,8 @@
 		<div class="card-header" *ngIf="isShowYears">
 			<div class="d-flex align-items-center">
 				
-				<button class="btn mr-auto" style="background-color:blue" *ngIf="yearStartIndex !== 0" 
+				<button class="btn mr-auto" style="background-color:blue" 
+				[disabled]="yearStartIndex === 0"
 				(click)="decrementYearRanges()">
 					<i class="fa fa-chevron-left"></i>
 					</button>
@@ -47,7 +48,8 @@
 					{{years[0]}}-{{years[years.length-1]}}
 				</button>
 
-				<button class="btn ml-auto" style="background-color:blue" *ngIf="yearEndIndex !== yearRanges.length - 1" 
+				<button class="btn ml-auto" style="background-color:blue" 
+				[disabled]="yearEndIndex === yearRanges.length"
 				(click)="incrementYearRanges()">
 					<i class="fa fa-chevron-right"></i>
 				</button>
