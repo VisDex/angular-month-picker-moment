@@ -98,14 +98,14 @@ export class MonthpickerComponent implements OnInit {
   }
   decrementYearRanges() {
     this.yearEndIndex = this.yearStartIndex;
-    this.yearStartIndex = this.yearStartIndex - 26 < 0 ? 0 : this.yearStartIndex - 26;
+    this.yearStartIndex = this.yearStartIndex - 25 < 0 ? 0 : this.yearStartIndex - 25;
     this.renderYears();
   }
 
   incrementYearRanges() {
     this.yearStartIndex = this.yearEndIndex;
-    this.yearEndIndex = this.yearStartIndex + 26 > this.yearRanges.length - 1
-      ? this.yearRanges.length - 1 : this.yearStartIndex + 26;
+    this.yearEndIndex = this.yearStartIndex + 25 > this.yearRanges.length - 1
+      ? this.yearRanges.length - 1 : this.yearStartIndex + 25;
     this.renderYears();
   }
 

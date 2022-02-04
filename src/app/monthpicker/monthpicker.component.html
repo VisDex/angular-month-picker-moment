@@ -3,7 +3,7 @@
 	<div class="card-header">
 		<div class="d-flex align-items-center">
 			
-			<button class="btn mr-auto" (click)="decrementMonth()">
+			<button class="btn mr-auto" style="background-color:red" (click)="decrementMonth()">
 				<i class="fa fa-chevron-left"></i>
 				</button>
 			
@@ -11,7 +11,7 @@
 				{{selectedMonthAsText}} {{selectedYearAsText}}
 			</button>
 
-			<button class="btn ml-auto" (click)="incrementMonth()">
+			<button class="btn ml-auto" style="background-color:red" (click)="incrementMonth()">
 				<i class="fa fa-chevron-right"></i>
 			</button>
 
@@ -19,7 +19,7 @@
 		<div class="card-header" *ngIf="!isShowYears">
 			<div class="d-flex align-items-center">
 				
-        <button class="btn mr-auto" (click)="model.decrementYear()">
+        <button class="btn mr-auto" style="background-color:black" (click)="model.decrementYear()">
           <i class="fa fa-chevron-left"></i>
           </button>
 				
@@ -27,7 +27,7 @@
           {{model.selectedYearText}}
         </button>
 
-				<button class="btn ml-auto" (click)="model.incrementYear()">
+				<button class="btn ml-auto" style="background-color:black" (click)="model.incrementYear()">
           <i class="fa fa-chevron-right"></i>
         </button>
 
@@ -38,7 +38,7 @@
 		<div class="card-header" *ngIf="isShowYears">
 			<div class="d-flex align-items-center">
 				
-				<button class="btn mr-auto" *ngIf="yearStartIndex !== 0" 
+				<button class="btn mr-auto" style="background-color:blue" *ngIf="yearStartIndex !== 0" 
 				(click)="decrementYearRanges()">
 					<i class="fa fa-chevron-left"></i>
 					</button>
@@ -47,7 +47,7 @@
 					{{years[0]}}-{{years[years.length-1]}}
 				</button>
 
-				<button class="btn ml-auto" *ngIf="yearEndIndex !== yearRanges.length - 1" 
+				<button class="btn ml-auto" style="background-color:blue" *ngIf="yearEndIndex !== yearRanges.length - 1" 
 				(click)="incrementYearRanges()">
 					<i class="fa fa-chevron-right"></i>
 				</button>
