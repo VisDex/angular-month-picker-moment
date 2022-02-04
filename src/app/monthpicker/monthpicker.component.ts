@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import moment from 'moment';
 // import 'moment/locale/de';
 
 @Component({
   selector: 'monthpicker',
   templateUrl: './monthpicker.component.html',
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MonthpickerComponent implements OnInit {
   @Input() renderOption: string;
