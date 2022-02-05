@@ -122,8 +122,17 @@ export class MonthpickerComponent implements OnInit {
         (x) => x === this.model.selectedMonthYear
       );
       this.yearStartIndex = selectedYearIndex - 12 < 0 ? 0: selectedYearIndex - 12;
-      this.yearEndIndex = selectedYearIndex + 13 > this.yearRanges.length
-      ? this.yearRanges.length: selectedYearIndex + 13 ;
+      if (this.yearStartIndex === 0) {
+        this.yearEndIndex =
+          this.yearStartIndex + 25 > this.yearRanges.length
+            ? this.yearRanges.length
+            : this.yearStartIndex + 25;
+      } else {
+        this.yearEndIndex =
+          selectedYearIndex + 13 > this.yearRanges.length
+            ? this.yearRanges.length
+            : selectedYearIndex + 13;
+      }
       this.renderYears();
     }
   }
